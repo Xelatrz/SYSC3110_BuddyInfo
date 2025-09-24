@@ -18,7 +18,7 @@ public class BuddyInfo {
     }
 
     public static void main(String[] args) {
-        BuddyInfo buddy = new BuddyInfo("Bob", "100 Rideau Crescent", "123-456-7890");
+        BuddyInfo buddy = new BuddyInfo("Bobby", "100 Rideau Crescent", "123-456-7890");
         System.out.println("Hello" + buddy.getName());
     }
 }
