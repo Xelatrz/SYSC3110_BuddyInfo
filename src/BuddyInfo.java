@@ -28,5 +28,10 @@ public class BuddyInfo {
         BuddyInfo buddy = (BuddyInfo) o;
         return name.equals(buddy.name) && address.equals(buddy.address) && phoneNumber.equals(buddy.phoneNumber);
     }
+
+    public static BuddyInfo importBuddyInfo(String line) {
+        String[] parts = line.split("#");
+        return new BuddyInfo(parts[0], parts[1], parts[2]);
+    }
 }
 

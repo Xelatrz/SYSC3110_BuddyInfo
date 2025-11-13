@@ -26,6 +26,10 @@ public class AddressBookGUI {
         exportAddressBookItem.addActionListener(e -> handleExport());
         addressBookMenu.add(exportAddressBookItem);
 
+        JMenuItem importAddressBookItem = new JMenuItem("Import");
+        importAddressBookItem.addActionListener(e -> handleImport());
+        addressBookMenu.add(importAddressBookItem);
+
         JMenu buddyMenu = new JMenu("BuddyInfo");
 
         JMenuItem addBuddyItem = new JMenuItem("Add Buddy");
@@ -50,6 +54,19 @@ public class AddressBookGUI {
         if (input != null) {
             String fileName = input + ".txt";
             addressBook.save(fileName);
+        }
+    }
+
+    private void handleImport() {
+        String input = JOptionPane.showInputDialog(frame, "Enter the file name: ", JOptionPane.QUESTION_MESSAGE);
+        if (input != null) {
+            String fileName = input + ".txt";
+            try {
+                addressBook.importAddressBook(fileName);
+            } catch (IOException E) {
+                JOptionPane.showMessageDialog(frame, E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
     }
 

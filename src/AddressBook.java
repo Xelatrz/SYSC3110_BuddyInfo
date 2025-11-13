@@ -1,8 +1,8 @@
-import javax.swing.DefaultListModel;
+import javax.swing.*;
 import java.io.*;
+import java.util.*;
 
 public class AddressBook extends DefaultListModel<BuddyInfo> implements Serializable {
-    String data = "";
 
     public void addBuddy(BuddyInfo buddyInfo) {
         if (buddyInfo != null) {
@@ -22,6 +22,7 @@ public class AddressBook extends DefaultListModel<BuddyInfo> implements Serializ
             e.printStackTrace();
         }
 
+        String data = "";
         for (int i = 0; i < this.size(); i++) {
             data += this.getElementAt(i).toString();
         }
@@ -31,6 +32,18 @@ public class AddressBook extends DefaultListModel<BuddyInfo> implements Serializ
             System.out.println("Text saved successfully");
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public AddressBook importAddressBook(String filePath) throws IOException {
+        AddressBook addressBook = new AddressBook();
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+            String line;
+            ArrayList<String> dataList = new ArrayList<>();
+            while ((line = br.readLine()) != null) {
+                addressBook.addBuddy(BuddyInfo.importBuddyInfo(line));
+            }
+            return addressBook;
         }
     }
 }
