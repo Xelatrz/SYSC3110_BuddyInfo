@@ -63,6 +63,9 @@ public class AddressBookGUI {
             String fileName = input + ".txt";
             try {
                 addressBook.importAddressBook(fileName);
+                for (int i = 0; i < addressBook.size(); i++) {
+                    System.out.println(addressBook.getElementAt(i).toString());
+                }
             } catch (IOException E) {
                 JOptionPane.showMessageDialog(frame, E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
