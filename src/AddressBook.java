@@ -1,6 +1,5 @@
 import javax.swing.*;
 import java.io.*;
-import java.util.*;
 
 public class AddressBook extends DefaultListModel<BuddyInfo> implements Serializable {
 
@@ -15,19 +14,12 @@ public class AddressBook extends DefaultListModel<BuddyInfo> implements Serializ
     }
 
     public void save(String fileName) {
-        try (FileOutputStream fos = new FileOutputStream("addressBook.ser"); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
-            oos.writeObject(this);
-            System.out.println("File saved successfully");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
         String data = "";
         for (int i = 0; i < this.size(); i++) {
-            data += this.getElementAt(i).toString();
+            data += this.getElementAt(i).toString() + "\n";
         }
 
-        try (FileWriter fw = new FileWriter(fileName); BufferedWriter bw = new BufferedWriter(fw)) {
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(fileName))) {
             bw.write(data);
             System.out.println("Text saved successfully");
         } catch (IOException e) {
@@ -39,7 +31,6 @@ public class AddressBook extends DefaultListModel<BuddyInfo> implements Serializ
         AddressBook addressBook = new AddressBook();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
-            ArrayList<String> dataList = new ArrayList<>();
             while ((line = br.readLine()) != null) {
                 addressBook.addBuddy(BuddyInfo.importBuddyInfo(line));
             }

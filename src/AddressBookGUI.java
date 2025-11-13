@@ -62,7 +62,9 @@ public class AddressBookGUI {
         if (input != null) {
             String fileName = input + ".txt";
             try {
-                addressBook.importAddressBook(fileName);
+                AddressBook importedAddressBook = new AddressBook();
+                importedAddressBook.importAddressBook(fileName);
+                this.addressBook = importedAddressBook;
                 for (int i = 0; i < addressBook.size(); i++) {
                     System.out.println(addressBook.getElementAt(i).toString());
                 }
