@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 
 public class AddressBookGUI {
     private JFrame frame;
@@ -48,7 +48,8 @@ public class AddressBookGUI {
     private void handleExport() {
         String input = JOptionPane.showInputDialog(frame, "Enter the file name: ", JOptionPane.QUESTION_MESSAGE);
         if (input != null) {
-            addressBook.save(input);
+            String fileName = input + ".txt";
+            addressBook.save(fileName);
         }
     }
 
