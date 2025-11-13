@@ -18,7 +18,7 @@ public class BuddyInfo {
 
     @Override
     public String toString() {
-        return name + ", " + address + ", " + phoneNumber;
+        return name + "#" + address + "#" + phoneNumber;
     }
 
     @Override

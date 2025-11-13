@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 
 public class AddressBookGUI {
     private JFrame frame;
@@ -16,17 +17,23 @@ public class AddressBookGUI {
         JMenuBar menuBar = new JMenuBar();
 
         JMenu addressBookMenu = new JMenu("AddressBook");
+
         JMenuItem newAddressBookItem = new JMenuItem("New AddressBook");
         newAddressBookItem.addActionListener(e -> addressBook.clear());
         addressBookMenu.add(newAddressBookItem);
 
+        JMenuItem exportAddressBookItem = new JMenuItem("Export");
+        exportAddressBookItem.addActionListener(e -> handleExport());
+        addressBookMenu.add(exportAddressBookItem);
+
         JMenu buddyMenu = new JMenu("BuddyInfo");
+
         JMenuItem addBuddyItem = new JMenuItem("Add Buddy");
         addBuddyItem.addActionListener(e -> addBuddy());
+        buddyMenu.add(addBuddyItem);
+
         JMenuItem removeBuddyItem = new JMenuItem("Remove Buddy");
         removeBuddyItem.addActionListener(e -> removeBuddy());
-
-        buddyMenu.add(addBuddyItem);
         buddyMenu.add(removeBuddyItem);
 
         menuBar.add(addressBookMenu);
@@ -36,6 +43,13 @@ public class AddressBookGUI {
         frame.setSize(200, 200);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
+    }
+
+    private void handleExport() {
+        String input = JOptionPane.showInputDialog(frame, "Enter the file name: ", JOptionPane.QUESTION_MESSAGE);
+        if (input != null) {
+            addressBook.save(input);
+        }
     }
 
     private void addBuddy() {
