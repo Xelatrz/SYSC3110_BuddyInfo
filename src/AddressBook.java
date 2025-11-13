@@ -3,6 +3,8 @@ import java.io.*;
 
 public class AddressBook extends DefaultListModel<BuddyInfo> implements Serializable {
 
+    private static final long serialVersionUID = 1L;
+
     public void addBuddy(BuddyInfo buddyInfo) {
         if (buddyInfo != null) {
             addElement(buddyInfo);
@@ -27,14 +29,26 @@ public class AddressBook extends DefaultListModel<BuddyInfo> implements Serializ
         }
     }
 
-    public AddressBook importAddressBook(String filePath) throws IOException {
+    public AddressBook importAddressBook(String fileName) throws IOException {
         AddressBook addressBook = new AddressBook();
-        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             String line;
             while ((line = br.readLine()) != null) {
                 addressBook.addBuddy(BuddyInfo.importBuddyInfo(line));
             }
             return addressBook;
+        }
+    }
+
+    public void serializeAddressBook(String fileName) throws IOException {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(fileName))) {
+            oos.writeObject(this);
+        }
+    }
+
+    public static AddressBook deserializeAddressBook(String fileName) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(fileName))) {
+            return (AddressBook) ois.readObject();
         }
     }
 }

@@ -30,6 +30,14 @@ public class AddressBookGUI {
         importAddressBookItem.addActionListener(e -> handleImport());
         addressBookMenu.add(importAddressBookItem);
 
+        JMenuItem serializeAddressBookItem = new JMenuItem("Serialize");
+        serializeAddressBookItem.addActionListener(e -> handleSerialize());
+        addressBookMenu.add(serializeAddressBookItem);
+
+        JMenuItem deserializeAddressBookItem = new JMenuItem("Deserialize");
+        deserializeAddressBookItem.addActionListener(e -> handleDeserialize());
+        addressBookMenu.add(deserializeAddressBookItem);
+
         JMenu buddyMenu = new JMenu("BuddyInfo");
 
         JMenuItem addBuddyItem = new JMenuItem("Add Buddy");
@@ -72,6 +80,32 @@ public class AddressBookGUI {
                 JOptionPane.showMessageDialog(frame, E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
 
+        }
+    }
+
+    private void handleSerialize() {
+        String input = JOptionPane.showInputDialog(frame, "Enter the file name: ", JOptionPane.QUESTION_MESSAGE);
+        if (input != null) {
+            String fileName = input + ".ser";
+            try {
+                addressBook.serializeAddressBook(fileName);
+            } catch (IOException E) {
+                JOptionPane.showMessageDialog(frame, E.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    private void handleDeserialize() {
+        String input = JOptionPane.showInputDialog(frame, "Enter the file name: ", JOptionPane.QUESTION_MESSAGE);
+        if (input != null) {
+            String fileName = input + ".ser";
+            try {
+                AddressBook importedAddressBook = addressBook.deserializeAddressBook(fileName);
+                this.addressBook = importedAddressBook;
+                buddyList.setModel(this.addressBook);
+            } catch (IOException | ClassNotFoundException e) {
+                JOptionPane.showMessageDialog(frame, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+            }
         }
     }
 

@@ -1,8 +1,11 @@
-public class BuddyInfo {
+import java.io.*;
+
+public class BuddyInfo implements Serializable {
 
     private String name;
     private String address;
     private String phoneNumber;
+    private static final long serialVersionUID = 1L;
 
     public BuddyInfo(String name, String address, String phone_number) {
         this.name = name;
