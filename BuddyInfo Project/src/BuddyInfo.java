@@ -1,25 +1,32 @@
-import java.util.ArrayList;
-import java.util.List;
-
 public class BuddyInfo {
 
     private String name;
     private String address;
-    private String phone_number;
+    private String phoneNumber;
 
     public BuddyInfo(String name, String address, String phone_number) {
         this.name = name;
         this.address = address;
-        this.phone_number = phone_number;
+        this.phoneNumber = phone_number;
     }
 
     public String getName() {
         return name;
     }
 
-    public static void main(String[] args) {
-        BuddyInfo buddy = new BuddyInfo("Bobby", "100 Rideau Crescent", "123-456-7890");
-        System.out.println("Hello" + buddy.getName());
+
+
+    @Override
+    public String toString() {
+        return name + ", " + address + ", " + phoneNumber;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof BuddyInfo)) return false;
+        BuddyInfo buddy = (BuddyInfo) o;
+        return name.equals(buddy.name) && address.equals(buddy.address) && phoneNumber.equals(buddy.phoneNumber);
     }
 }
 
