@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<project name="BuddyInfo Project" default="packaging">
+    <target name="packaging">
+        <jar destfile="out/artifacts/SYSC3110_BuddyInfo_jar/AntBuild.jar" basedir="out/production/SYSC3110_BuddyInfo">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}"/>
+                <attribute name="Implementation-Title" value="BuddyInfo Project"/>
+                <attribute name="Implementation-Version" value="11/27/2025"/>
+                <attribute name="Main-Class" value="AddressBookGUI"/>
+                <section name="AddressBookGUI">
+                    <attribute name="Sealed" value="false"/>
+                </section>
+            </manifest>
+        </jar>
+    </target>
+    <target name="run">
+        <java classname="AddressBookGUI">
+            <classpath>
+                <pathelement location="out/artifacts/SYSC3110_BuddyInfo_jar/AntBuild.jar"/>
+                <pathelement path="out/production/SYSC3110_BuddyInfo"/>
+            </classpath>
+        </java>
+    </target>
+</project>
