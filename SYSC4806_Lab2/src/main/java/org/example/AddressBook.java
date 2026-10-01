@@ -1,20 +1,18 @@
 package org.example;
 
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
-
+import jakarta.persistence.*;
 import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class AddressBook {
 
     @Id
-    private Integer id = null;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
-    private ArrayList<BuddyInfo> buddyList;
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<BuddyInfo> buddyList;
 
     public AddressBook() {
         buddyList = new ArrayList<BuddyInfo>();
@@ -47,16 +45,17 @@ public class AddressBook {
         }
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public List<BuddyInfo> getBuddyList() {
+        return buddyList;
     }
 
-    public ArrayList<BuddyInfo> getBuddyList() {
-        return buddyList;
+    @Override
+    public String toString() {
+        return String.format("AddressBook[id=%d, numBuddies=%d]", id, buddyList.size());
     }
 
     public static void main(String[] args) {

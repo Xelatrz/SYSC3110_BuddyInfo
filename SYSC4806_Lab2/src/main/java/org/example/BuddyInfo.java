@@ -1,13 +1,16 @@
 package org.example;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
 public class BuddyInfo {
 
     @Id
-    private Integer id;
+    @GeneratedValue(strategy=GenerationType.AUTO)
+    private Long id;
 
     public String name;
     public String phoneNumber;
@@ -35,11 +38,12 @@ public class BuddyInfo {
         this.phoneNumber = phone_number;
     }
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    @Override
+    public String toString() {
+        return String.format("BuddyInfo[id=%d, name='%s', phoneNumber='%s']", id, name, phoneNumber);
     }
 }
