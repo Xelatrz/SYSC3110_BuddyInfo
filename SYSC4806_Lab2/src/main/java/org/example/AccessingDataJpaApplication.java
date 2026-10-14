@@ -50,12 +50,18 @@ public class AccessingDataJpaApplication {
             logger.info("");
 
 
-            // save new address book
-            AddressBook addressBook = new AddressBook();
-            addressBook.addBuddy(new BuddyInfo("Tom", "542"));
-            addressBook.addBuddy(new BuddyInfo("Billy", "907"));
-            addressBook.addBuddy(new BuddyInfo("Sarah", "184"));
-            addressRepo.save(addressBook);
+            // save new address books
+            AddressBook addressBook1 = new AddressBook();
+            addressBook1.addBuddy(new BuddyInfo("Tom", "542"));
+            addressBook1.addBuddy(new BuddyInfo("Billy", "907"));
+            addressBook1.addBuddy(new BuddyInfo("Sarah", "184"));
+            addressRepo.save(addressBook1);
+
+            AddressBook addressBook2 = new AddressBook();
+            addressBook2.addBuddy(new BuddyInfo("Kevin", "100"));
+            addressBook2.addBuddy(new BuddyInfo("Matt", "200"));
+            addressBook2.addBuddy(new BuddyInfo("Laurence", "300"));
+            addressRepo.save(addressBook2);
 
             // fetch all address books
             logger.info("Address books found with findAll():");
